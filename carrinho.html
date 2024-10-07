@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho</title>
+    <link rel="stylesheet" href="carrinho.css">
+    <script>// Função para atualizar o preço total de cada produto baseado na quantidade
+        function atualizarPrecoTotal(produtoLinha) {
+            const quantidade = produtoLinha.querySelector('.quantidade').value;
+            const precoUnitario = parseFloat(produtoLinha.querySelector('.preco-unitario').innerText.replace('R$', '').replace(',', '.'));
+            const precoTotal = quantidade * precoUnitario;
+        
+            // Atualiza o valor total do produto na linha
+            produtoLinha.querySelector('.preco-total').innerText = `R$ ${precoTotal.toFixed(2).replace('.', ',')}`;
+        }
+        
+        // Função para calcular o total final do carrinho
+        function calcularTotalFinal() {
+            let totalFinal = 0;
+            const produtos = document.querySelectorAll('tbody tr');
+        
+            produtos.forEach(produtoLinha => {
+                const precoTotal = parseFloat(produtoLinha.querySelector('.preco-total').innerText.replace('R$', '').replace(',', '.'));
+                totalFinal += precoTotal;
+            });
+        
+            // Atualiza o valor total final no HTML
+            document.getElementById('total-final').innerText = `R$ ${totalFinal.toFixed(2).replace('.', ',')}`;
+        }
+        
+        // Adiciona eventos para alterar a quantidade e recalcular o total
+        const quantidades = document.querySelectorAll('.quantidade');
+        
+        quantidades.forEach(quantidade => {
+            quantidade.addEventListener('input', function() {
+                const produtoLinha = this.closest('tr'); // Seleciona a linha correspondente
+                atualizarPrecoTotal(produtoLinha); // Atualiza o total do produto
+                calcularTotalFinal(); // Recalcula o total final
+            });
+        });
+        
+        // Função para remover um produto do carrinho
+        function removerProduto(produtoLinha) {
+            produtoLinha.remove();
+            calcularTotalFinal(); // Recalcula o total final após remoção
+        }
+        
+        // Adiciona eventos para remover produtos
+        const removerBotoes = document.querySelectorAll('.remover-produto');
+        
+        removerBotoes.forEach(botao => {
+            botao.addEventListener('click', function() {
+                const produtoLinha = this.closest('tr'); // Seleciona a linha correspondente
+                removerProduto(produtoLinha); // Remove o produto
+            });
+        });
+        
+        // Calcula o total inicial na página carregada
+        calcularTotalFinal();
+        </script>
+</head>
+<body>
+    <header>
+
+
+
+    </header>
+    <main>
+
+        <section class="carrinho">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>produto</th>
+                        <th>quantidade</th>
+                        <th>preço Unitario</th>
+                        <th>Total</th>
+                        <th>Ação</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>Produto exemplo 1</th>
+                        <td>
+                            <input type="number" value="1" min="1" class="quantidade">
+                        </td>
+                        <td class="preco-unitario">R$ 50,00</td>
+                        <td class="preco-total">R$ 50,00</td>
+                        <td>
+                            <button class="remover-produto">Remover</button>
+                        </td>
+                    </tr>
+                    <!-- 2 Produto literal -->
+                    <tr>
+                        <td>produto Exemplo 2</td>
+                        <input type="number" value="2" min="1" class="quantidade">
+                        <td class="preco-unitario">R$ 50,00</td>
+                        <td class="preco-total">R$ 50,00</td>
+                        <td>
+                            <button class="remover-produto">Remover</button>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td>produto exemplo 2</td>
+                        <td>
+                            <input type="number" value="2" min="1" class="quantidade">
+                        </td>
+                        <td class="preco-unitario">R$ 30,00</td>
+                        <td class="preco-total">R$ 60,00</td>
+                        <td>
+                            <button class="remover-produto">Remover</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="total-final">
+                <h3>Total final: <span id="total-final">R$ 110,00</span></h3>
+            </div>
+        </section>
+    </main>
+    <script src="carrinho.js"></script>
+    <footer>
+
+
+    </footer>
+    
+</body>
+</html>

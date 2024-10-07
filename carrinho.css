@@ -1,0 +1,54 @@
+main{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td{
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th{
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+input.quantidade{
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+}
+
+button.remover-produto{
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.total-final{
+    text-align: right;
+    margin-top: 20px;
+}
+
+.total-final h3{
+    color: #333;
+}
+#total-final {
+    color: #e74c3c;
+}
+
+button.remover-produto:hover{
+    color: #ef3950;
+}
